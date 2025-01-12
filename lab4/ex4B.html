@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>23BCE1265</title>
+    <style>
+      body {
+        font-family: monospace;
+        font-weight: 400;
+      }
+      legend {
+        color: red;
+        font-weight: 600;
+        padding: 20px 0;
+      }
+      input {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <form name="form1" type="post">
+      <fieldset>
+        <legend>Personal Details</legend>
+        <br />
+        <label>Name:</label>
+        <input type="text" />
+        <br />
+        <label>Password:</label>
+        <input type="text" />
+        <br />
+        <label>E-mail id:</label>
+        <input type="text" />
+        <br />
+        <label for="">Gender: </label>
+        <input type="radio" name="gender" />Male
+        <input type="radio" name="gender" />Female
+        <br />
+        <label for="">Date</label>
+        <input type="date" />
+        <br />
+        <label for="">Mobile#:</label>
+        <input type="text" />
+      </fieldset>
+      <br />
+
+      <fieldset>
+        <legend>Educational Qualification</legend>
+        <label>Degree : </label>
+        <select name="degree">
+          <option>--Select Group--</option>
+          <optgroup label="UG">
+            <option>BE</option>
+            <option>BTech</option>
+            <option>BSc</option>
+            <option>BA</option>
+            <option>BCA</option>
+            <option>BBA</option>
+            <option>Others</option>
+          </optgroup>
+          <optgroup label="PG">
+            <option>ME</option>
+            <option>MTech</option>
+            <option>MSc</option>
+            <option>MA</option>
+            <option>MCA</option>
+            <option>MBA</option>
+            <option>Others</option>
+          </optgroup>
+          <optgroup label="PhD">
+            <option>Engineering</option>
+            <option>Science</option>
+            <option>Management</option>
+            <option>Others</option>
+          </optgroup>
+        </select>
+        <label>Engineering : </label>
+        <select name="degree">
+          <option>--Select Group--</option>
+          <option>CSE</option>
+          <option>ECE</option>
+          <option>EEE</option>
+          <option>CIVIL</option>
+          <option>MECH</option>
+        </select>
+        <br />
+      </fieldset>
+      <br />
+
+      <label>Hobbies: </label>
+      <input type="checkbox" name="skill" /> Playing Chess
+      <input type="checkbox" name="skill" /> Reading Books
+      <br />
+      <label>Favourite Color: </label>
+      <input type="color" />
+      <br />
+
+      <legend>Address</legend>
+      <input type="text" style="width: 90%; height: 40px" />
+      <br />
+      <label>Attach Resume: </label>
+      <input type="file" />
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
