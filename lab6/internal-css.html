@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>23BCE1265</title>
+    <style>
+        .myphto {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid black;
+            animation: titleAnimation 4s infinite;
+        }
+
+        @keyframes titleAnimation {
+            0% {
+                font-size: 20px;
+                color: red;
+            }
+            25% {
+                font-size: 25px;
+                color: blue;
+            }
+            50% {
+                font-size: 30px;
+                color: green;
+            }
+            75% {
+                font-size: 25px;
+                color: orange;
+            }
+            100% {
+                font-size: 20px;
+                color: red;
+            }
+        }
+
+        .title {
+            font-family: Arial, sans-serif;
+            animation: titleAnimation 4s infinite;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h1 class="title">My Favorite Musicians</h1>
+    <img src="daft-punk.jpg" alt="Favorite Musicians" class="myphto">
+    </center>
+</body>
+</html>
