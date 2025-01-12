@@ -1,0 +1,10 @@
+body {
+  display: flex;
+  padding: 20px;
+}
+.media {
+  padding-right: 10px;
+}
+iframe {
+  width: 100%;
+}
