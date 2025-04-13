@@ -1,0 +1,12 @@
+body {
+  text-align: center;
+  margin: 10px 0;
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: antiquewhite;
+}
+
