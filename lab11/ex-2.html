@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>23BCE1265</title>
+    <style>
+      body {
+        text-align: center;
+        margin-top: 50px;
+      }
+      input {
+        padding: 10px;
+      }
+      #display-time {
+        font-size: 4em;
+        font-weight: 800;
+        margin-bottom: 10px;
+        padding: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      #display-age {
+        font-size: 1.5em;
+        margin-top: 20px;
+      }
+
+      #start {
+        background-color: rgba(14, 190, 14, 0.617);
+        font-size: 1em;
+        margin: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      #stop {
+        background-color: rgba(255, 0, 0, 0.662);
+        font-size: 1em;
+        margin: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      #reset {
+        background-color: rgba(255, 255, 0, 0.726);
+        font-size: 1em;
+        margin: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      .bday {
+        margin-top: 50px;
+      }
+
+      .age-btn {
+        padding: 5px 10px;
+        font-size: 15px;
+        box-shadow: 0 3px 5px 1px;
+        background-color: rgb(158, 188, 215);
+        cursor: pointer;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="display-time">00:00:00</div>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+    <hr />
+
+    <script>
+      let timer;
+      let seconds = 0;
+      let isRunning = false;
+
+      function formatTime(seconds) {
+        let hrs = Math.floor(seconds / 3600)
+          .toString()
+          .padStart(2, "0");
+        let mins = Math.floor((seconds % 3600) / 60)
+          .toString()
+          .padStart(2, "0");
+        let secs = (seconds % 60).toString().padStart(2, "0");
+        return `${hrs}:${mins}:${secs}`;
+      }
+
+      function updateTimer() {
+        document.getElementById("display-time").textContent =
+          formatTime(seconds);
+      }
+
+      function start() {
+        if (!isRunning) {
+          isRunning = true;
+          timer = setInterval(() => {
+            seconds++;
+            updateTimer();
+          }, 1000);
+        }
+      }
+      function stop() {
+        clearInterval(timer);
+        isRunning = false;
+      }
+      function reset() {
+        clearInterval(timer);
+        seconds = 0;
+        isRunning = false;
+        updateTimer();
+      }
+      document.getElementById("start").addEventListener("click", start);
+      document.getElementById("stop").addEventListener("click", stop);
+      document.getElementById("reset").addEventListener("click", reset);
+      updateTimer();
+    </script>
+
+    <div class="bday">
+      <label for="dob">Enter your Date Of Birth:</label>
+      <br />
+      <br />
+      <input type="date" id="dob" />
+      <br />
+      <br />
+      <button class="age-btn" onclick="calculateAge()">Calculate age</button>
+      <div id="display-age"></div>
+    </div>
+    <hr />
+
+    <script>
+      function calculateAge() {
+        let dob = document.getElementById("dob").value;
+        if (dob) {
+          let bday = new Date(dob);
+          let currdate = new Date();
+
+          let age = currdate.getFullYear() - bday.getFullYear();
+          let month = currdate.getMonth() - bday.getMonth();
+          let days = currdate.getDate() - bday.getDate();
+
+          if (month < 0 || (month == 0 && days < 0)) {
+            age--;
+          }
+
+          document.getElementById(
+            "display-age"
+          ).textContent = `Your age : ${age} years`;
+        } else {
+          alert("Please enter a valid date");
+        }
+      }
+    </script>
+    <br />
+    <div>
+      <label for="">Press Keys to count</label>
+      <br />
+      <br />
+      <input type="text" id="keyInput" class="inp" />
+      <p>Key Press Count: <span id="keyCount">0</span></p>
+    </div>
+
+    <script>
+      var keyInput = document.getElementById("keyInput");
+      var keyCount = document.getElementById("keyCount");
+
+      keyInput.addEventListener("keydown", function () {
+        var count = parseInt(keyCount.textContent);
+        keyCount.textContent = count + 1;
+      });
+    </script>
+  </body>
+</html>
+

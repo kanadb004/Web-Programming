@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1265</title>
+</head>
+<body>
+    <canvas id="timeDisplay" width="400" height="400" style="border:2px solid black"></canvas>
+    <script>
+        const clockCanvas = document.getElementById("timeDisplay");
+        const ctxClock = clockCanvas.getContext("2d");
+        const centerXPos = clockCanvas.width / 2;
+        const centerYPos = clockCanvas.height / 2;
+        const clockRadius = 150;
+
+        function renderClockFace() {
+            ctxClock.beginPath();
+            ctxClock.arc(centerXPos, centerYPos, clockRadius, 0, Math.PI * 2);
+            ctxClock.fillStyle = "#ADD8E6"; // Light blue background
+            ctxClock.fill();
+            ctxClock.lineWidth = 5;
+            ctxClock.strokeStyle = "#000000";
+            ctxClock.stroke();
+        }
+
+        function addHourNumbers() {
+            ctxClock.font = "20px Arial";
+            ctxClock.fillStyle = "#333333"; // Dark gray numbers
+            ctxClock.textAlign = "center";
+            ctxClock.textBaseline = "middle";
+            for (let i = 1; i <= 12; i++) {
+                let angle = (i * Math.PI) / 6 - Math.PI / 2;
+                let posX = centerXPos + Math.cos(angle) * (clockRadius - 35);
+                let posY = centerYPos + Math.sin(angle) * (clockRadius - 35);
+                ctxClock.fillText(i, posX, posY);
+            }
+        }
+
+        function addTimeMarkers() {
+            for (let i = 0; i < 60; i++) {
+                let angle = (i * Math.PI) / 30 - Math.PI / 2;
+                let startX = centerXPos + Math.cos(angle) * (clockRadius - 10);
+                let startY = centerYPos + Math.sin(angle) * (clockRadius - 10);
+                let endX = centerXPos + Math.cos(angle) * (clockRadius - (i % 5 === 0 ? 20 : 10));
+                let endY = centerYPos + Math.sin(angle) * (clockRadius - (i % 5 === 0 ? 20 : 10));
+                ctxClock.beginPath();
+                ctxClock.moveTo(startX, startY);
+                ctxClock.lineTo(endX, endY);
+                ctxClock.lineWidth = i % 5 === 0 ? 3 : 1;
+                ctxClock.strokeStyle = "#333333"; // Dark gray tick marks
+                ctxClock.stroke();
+            }
+        }
+
+        function drawClockHand(angle, length, thickness, handColor) {
+            ctxClock.beginPath();
+            ctxClock.moveTo(centerXPos, centerYPos);
+            let handX = centerXPos + Math.cos(angle) * length;
+            let handY = centerYPos + Math.sin(angle) * length;
+            ctxClock.lineTo(handX, handY);
+            ctxClock.lineWidth = thickness;
+            ctxClock.strokeStyle = handColor;
+            ctxClock.lineCap = "round";
+            ctxClock.stroke();
+        }
+
+        function updateClock() {
+            ctxClock.clearRect(0, 0, clockCanvas.width, clockCanvas.height);
+            renderClockFace();
+            addHourNumbers();
+            addTimeMarkers();
+            let currentTime = new Date();
+            let hr = currentTime.getHours() % 12;
+            let min = currentTime.getMinutes();
+            let sec = currentTime.getSeconds();
+            let hrAngle = ((hr + min / 60) * Math.PI) / 6 - Math.PI / 2;
+            let minAngle = ((min + sec / 60) * Math.PI) / 30 - Math.PI / 2;
+            let secAngle = (sec * Math.PI) / 30 - Math.PI / 2;
+            drawClockHand(hrAngle, clockRadius * 0.5, 6, "#00008B");  // Dark blue hour hand
+            drawClockHand(minAngle, clockRadius * 0.7, 4, "#00008B"); // Dark blue minute hand
+            drawClockHand(secAngle, clockRadius * 0.9, 2, "#FF8C00"); // Orange second hand
+            ctxClock.beginPath();
+            ctxClock.arc(centerXPos, centerYPos, 5, 0, Math.PI * 2);
+            ctxClock.fillStyle = "#FFFFFF"; // White center pivot
+            ctxClock.fill();
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>

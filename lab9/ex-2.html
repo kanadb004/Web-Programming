@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1265</title>
+</head>
+<body>
+    <h1>Airline Reservations System</h1>
+    <button onclick="reserveSeat()">Reserve a Seat</button>
+    <p id="boardingPass"></p>
+
+    <script>
+        const seats = Array(10).fill(0);
+
+        function reserveSeat() {
+            let name = prompt("Enter your name:");
+            let section = prompt("Type 1 for First Class (seats 1–5) or 2 for Economy (seats 6–10):");
+            let seatNumber = -1;
+            let classType = "";
+
+            if (section == 1) {
+                for (let i = 0; i < 5; i++) {
+                    if (seats[i] == 0) {
+                        seats[i] = 1;
+                        seatNumber = i + 1;
+                        classType = "First Class";
+                        break;
+                    }
+                }
+                if (seatNumber == -1) {
+                    if (confirm("First Class is full. Would you like to be placed in Economy?")) {
+                        seatNumber = assignEconomySeat();
+                        classType = "Economy";
+                    }
+                }
+            } else if (section == 2) {
+                seatNumber = assignEconomySeat();
+                classType = "Economy";
+
+                if (seatNumber == -1) {
+                    if (confirm("Economy is full. Would you like to be placed in First Class?")) {
+                        for (let i = 0; i < 5; i++) {
+                            if (seats[i] == 0) {
+                                seats[i] = 1;
+                                seatNumber = i + 1;
+                                classType = "First Class";
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if (seatNumber != -1) {
+                document.getElementById("boardingPass").innerHTML = `<h3>Boarding Pass:</h3> Name: ${name} <br> Seat Number: ${seatNumber} <br> Class: ${classType}`;
+            } else {
+                document.getElementById("boardingPass").innerHTML = "Sorry, no seats available.";
+            }
+        }
+
+        function assignEconomySeat() {
+            for (let i = 5; i < 10; i++) {
+                if (seats[i] == 0) {
+                    seats[i] = 1;
+                    return i + 1;
+                }
+            }
+            return -1;
+        }
+    </script>
+</body>
+</html>

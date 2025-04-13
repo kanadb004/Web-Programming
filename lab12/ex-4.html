@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1265</title>
+    <style>
+        .wrapper {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            border: 2px solid black;
+        }
+        .layer {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            text-align: center;
+            line-height: 100px;
+            font-weight: bold;
+            color: white;
+        }
+        #layerA { background: orange; top: 50px; left: 50px; z-index: 1; }
+        #layerB { background: purple; top: 80px; left: 80px; z-index: 2; }
+        #layerC { background: teal; top: 110px; left: 110px; z-index: 3; }
+    </style>
+</head>
+<body>
+    <h2>Adjust Layer Stacking</h2>
+    <div class="wrapper">
+        <div id="layerA" class="layer">Layer A</div>
+        <div id="layerB" class="layer">Layer B</div>
+        <div id="layerC" class="layer">Layer C</div>
+    </div>
+
+    <div>
+        <label for="selectLayer">Choose Layer:</label>
+        <select id="selectLayer">
+            <option value="layerA">Layer A</option>
+            <option value="layerB">Layer B</option>
+            <option value="layerC">Layer C</option>
+        </select>
+        <label for="zIndexValue">Set z-index:</label>
+        <input type="number" id="zIndexValue" value="1">
+        <button onclick="modifyZIndex()">Apply</button>
+    </div>
+
+    <h3>Current z-index levels:</h3>
+    <p id="zIndexDisplay"></p>
+
+    <script>
+        function modifyZIndex() {
+            let selectedLayer = document.getElementById("selectLayer").value;
+            let newZIndex = document.getElementById("zIndexValue").value;
+            document.getElementById(selectedLayer).style.zIndex = newZIndex;
+            refreshZIndexDisplay();
+        }
+
+        function refreshZIndexDisplay() {
+            let zData = `
+                Layer A: ${document.getElementById("layerA").style.zIndex}<br>
+                Layer B: ${document.getElementById("layerB").style.zIndex}<br>
+                Layer C: ${document.getElementById("layerC").style.zIndex}
+            `;
+            document.getElementById("zIndexDisplay").innerHTML = zData;
+        }
+
+        refreshZIndexDisplay();
+    </script>
+</body>
+</html>

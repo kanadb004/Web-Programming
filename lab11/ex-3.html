@@ -1,0 +1,270 @@
+!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>23BCE1265</title>
+    <style>
+      .error {
+        color: red;
+        font-size: 0.9em;
+        display: inline-block;
+        margin-left: 10px;
+      }
+      .form-field {
+        margin-bottom: 10px;
+      }
+      .head {
+        display: flex;
+        justify-content: space-around;
+      }
+      p {
+        border: 1px solid black;
+      }
+    </style>
+    <script>
+      function displayTime() {
+        const now = new Date();
+        let hours = now.getHours().toString().padStart(2, "0");
+        let minutes = now.getMinutes().toString().padStart(2, "0");
+        let seconds = now.getSeconds().toString().padStart(2, "0");
+        document.getElementById(
+          "time"
+        ).innerHTML = `${hours}:${minutes}:${seconds}`;
+        setTimeout(displayTime, 1000);
+      }
+
+      function validateForm() {
+        let isValid = true;
+        clearErrors();
+
+        let name = document.getElementById("name").value;
+        if (name.length > 15) {
+          showError("name", "Name should not exceed 15 characters.");
+          isValid = false;
+        }
+
+        let address = document.getElementById("address").value;
+        if (address == "") {
+          showError("address", "Address is mandatory.");
+          isValid = false;
+        }
+
+        let zipCode = document.getElementById("zip").value;
+        if (!/^\d{5,10}$/.test(zipCode)) {
+          showError(
+            "zip",
+            "Zip code should be numeric and between 5 to 10 digits."
+          );
+          isValid = false;
+        }
+
+        let phone = document.getElementById("phone").value;
+        if (!/^\d{10}$/.test(phone)) {
+          showError(
+            "phone",
+            "Phone number should be numeric and exactly 10 digits."
+          );
+          isValid = false;
+        }
+
+        let email = document.getElementById("email").value;
+        if (!/\S+@\S+\.\S+/.test(email)) {
+          showError("email", "Please enter a valid email address.");
+          isValid = false;
+        }
+
+        let password = document.getElementById("password").value;
+        let passwordPattern =
+          /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{8,15}$/;
+        if (!passwordPattern.test(password)) {
+          showError(
+            "password",
+            "Password must contain a number, a character, a special character, and length between 8 to 15."
+          );
+          isValid = false;
+        }
+
+        let panCard = document.getElementById("pan").value;
+        let panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+        if (!panPattern.test(panCard)) {
+          showError(
+            "pan",
+            "PAN card number must be 10 characters, following the pattern (XXXXX1234X)."
+          );
+          isValid = false;
+        }
+
+        let mandatoryFields = document.querySelectorAll(".mandatory");
+        for (let field of mandatoryFields) {
+          if (field.value === "") {
+            showError(field.name, `${field.name} is mandatory.`);
+            isValid = false;
+            break;
+          }
+        }
+
+        if (isValid) {
+          const gender = document.getElementsByName("gender");
+          let genderValue = "";
+          for (let i = 0; i < gender.length; i++) {
+            if (gender[i].checked) {
+              genderValue = gender[i].value;
+            }
+          }
+          const country = document.getElementsByName("country");
+          let countryValue = "";
+          for (let i = 0; i < country.length; i++) {
+            if (country[i].checked) {
+              countryValue = country[i].value;
+            }
+          }
+          const preferences = document.getElementsByName("preferences");
+          let preferencesValue = "";
+          for (let i = 0; i < preferences.length; i++) {
+            if (preferences[i].checked) {
+              preferencesValue = preferencesValue
+                ? preferencesValue + ", " + preferences[i].value
+                : preferences[i].value;
+            }
+          }
+
+          document.getElementById("formContent").innerHTML = `
+                <h2>Form submitted successfully!</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Gender:</strong> ${genderValue}</p>
+                <p><strong>Country:</strong> ${countryValue}</p>
+                <p><strong>Preferences:</strong> ${preferencesValue}</p>`;
+        }
+
+        return isValid;
+      }
+
+      function showError(fieldId, message) {
+        let errorLabel = document.getElementById(fieldId + "Error");
+        if (!errorLabel) {
+          errorLabel = document.createElement("label");
+          errorLabel.id = fieldId + "Error";
+          errorLabel.classList.add("error");
+          document
+            .getElementById(fieldId)
+            .parentElement.appendChild(errorLabel);
+        }
+        errorLabel.innerText = message;
+      }
+
+      function clearErrors() {
+        let errorMessages = document.querySelectorAll(".error");
+        for (let error of errorMessages) {
+          error.remove();
+        }
+      }
+
+      window.onload = function () {
+        displayTime();
+      };
+    </script>
+  </head>
+  <body>
+    <form onsubmit="return validateForm()">
+      <div class="head">
+        <div class="title"><h2>Test JavaScript Form Validation</h2></div>
+        <div class="time">
+          <p>Time: <span id="time"></span></p>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="name">Name <span style="color: red">*</span></label>
+        <input type="text" id="name" name="name" class="mandatory" required />
+      </div>
+      <div class="form-field">
+        <label for="gender">Gender <span style="color: red">*</span></label
+        ><br />
+        <input type="radio" id="male" name="gender" value="Male" required />
+        Male
+        <input type="radio" id="female" name="gender" value="Female" /> Female
+      </div>
+
+      <div class="form-field">
+        <label for="address">Address <span style="color: red">*</span></label
+        ><br />
+        <textarea
+          id="address"
+          name="address"
+          class="mandatory"
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="zip">Zip Code <span style="color: red">*</span></label>
+        <input type="text" id="zip" name="zip" class="mandatory" required />
+      </div>
+
+      <div class="form-field">
+        <label for="phone">Phone <span style="color: red">*</span></label>
+        <input type="text" id="phone" name="phone" class="mandatory" required />
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email <span style="color: red">*</span></label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="mandatory"
+          required
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="password">Password <span style="color: red">*</span></label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="mandatory"
+          required
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="pan"
+          >PAN Card Number <span style="color: red">*</span></label
+        >
+        <input type="text" id="pan" name="pan" class="mandatory" required />
+      </div>
+
+      <div class="form-field">
+        <label for="country">Country <span style="color: red">*</span></label
+        ><br />
+        <input type="radio" id="india" name="country" value="India" required />
+        India <input type="radio" id="usa" name="country" value="USA" /> USA
+      </div>
+
+      <div class="form-field">
+        <label for="preferences">Preferences</label><br />
+        <input
+          type="checkbox"
+          id="preference1"
+          name="preferences"
+          value="Preference 1"
+        />
+        Preference 1
+        <input
+          type="checkbox"
+          id="preference2"
+          name="preferences"
+          value="Preference 2"
+        />
+        Preference 2
+      </div>
+
+      <div>
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+
+    <div id="formContent"></div>
+  </body>
+</html>

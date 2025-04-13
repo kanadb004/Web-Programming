@@ -1,0 +1,64 @@
+body {
+  color: aliceblue;
+  background-image: url("https://imgs.search.brave.com/atdFIk0c5PWaiiwnJdVWOgfDHmcKWUBYKGDDBpFS9xU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAyLzE2Lzk2Lzg5/LzM2MF9GXzIxNjk2/ODkyMF93dVlQcG1Y/NVdTQVdvREFFZVo2/b3RscE10U2JYblZm/YS5qcGc");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-size: cover;
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  padding: 20px;
+  border-radius: 50%;
+  font-weight: 900;
+  background-image: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+}
+
+h2 {
+  font-size: 50px;
+  margin-top: 20px;
+}
+
+section {
+  column-count: 2;
+  line-height: 30pt;
+}
+
+#ball {
+  animation: play 2s infinite;
+}
+
+@keyframes play {
+  0% {
+    transform: translate(0, 0) rotate(0deg) skew(0deg);
+  }
+  25% {
+    transform: translate(20px, 10px) rotate(10deg) skew(5deg);
+  }
+  50% {
+    transform: translate(-15px, -5px) rotate(-15deg) skew(-5deg);
+  }
+  75% {
+    transform: translate(10px, 15px) rotate(5deg) skew(3deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg) skew(0deg);
+  }
+}
+
+svg {
+  position: fixed;
+  left: 150px;
+}

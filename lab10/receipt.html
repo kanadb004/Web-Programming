@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1265</title>
+</head>
+<body>
+    <h1>Receipt</h1>
+    <div id="receipt"></div>
+
+    <script>
+        const receiptData = JSON.parse(localStorage.getItem('receiptData'));
+        if (receiptData) {
+            const receipt = document.getElementById('receipt');
+            const customerInfo = `
+                <h2>Customer Information</h2>
+                <p>Name: ${receiptData.firstName} ${receiptData.lastName}</p>
+                <p>Phone Number: ${receiptData.phoneNumber}</p>
+                <p>Email: ${receiptData.email}</p>
+            `;
+
+            let productInfo = `
+                <h2>Product Selection</h2>
+                <ul>
+            `;
+            receiptData.products.forEach(product => {
+                productInfo += `
+                    <li>${product.name} - ${product.quantity} kg @ $${product.price}/kg = $${product.total.toFixed(2)}</li>
+                `;
+            });
+            productInfo += '</ul>';
+
+            receipt.innerHTML = customerInfo + productInfo;
+        } else {
+            receipt.innerHTML = '<p>No order data found. Please go back and submit the order form.</p>';
+        }
+    </script>
+</body>
+</html>

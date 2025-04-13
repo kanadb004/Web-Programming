@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1265</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h2>Charts using Plotly.js</h2>
+   
+    <div id="barGraph" style="width: 600px; height: 400px;"></div>
+    <div id="lineGraph" style="width: 600px; height: 400px;"></div>
+    <div id="pieGraph" style="width: 600px; height: 400px;"></div>
+    <div id="donutGraph" style="width: 600px; height: 400px;"></div>
+ 
+    <script>
+        const labels = ["Alpha", "Beta", "Gamma", "Delta", "Epsilon"];
+        const dataPoints = [12, 25, 35, 45, 55];
+        const colorPalette = ['#FF5733', '#33FF57', '#3357FF', '#F0E68C', '#DDA0DD'];
+ 
+        Plotly.newPlot("barGraph", [{
+            x: labels,
+            y: dataPoints,
+            type: "bar",
+            marker: { color: colorPalette }
+        }], { title: "Bar Graph", xaxis: { title: "Categories" }, yaxis: { title: "Values" } });
+ 
+        Plotly.newPlot("lineGraph", [{
+            x: labels,
+            y: dataPoints,
+            type: "scatter",
+            mode: "lines+markers",
+            marker: { color: "#8A2BE2" }
+        }], { title: "Line Graph", xaxis: { title: "Categories" }, yaxis: { title: "Values" } });
+ 
+        Plotly.newPlot("pieGraph", [{
+            labels: labels,
+            values: dataPoints,
+            type: "pie",
+            marker: { colors: colorPalette }
+        }], { title: "Pie Graph" });
+ 
+        Plotly.newPlot("donutGraph", [{
+            labels: labels,
+            values: dataPoints,
+            type: "pie",
+            hole: 0.4,
+            marker: { colors: colorPalette }
+        }], { title: "Donut Graph" });
+    </script>
+</body>
+</html>

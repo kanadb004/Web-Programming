@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>23BCE1265</title>
+    <style>
+      .inp,
+      .button {
+        margin: 10px;
+        padding: 10px;
+      }
+      .button {
+        background-color: red;
+      }
+      .greeting {
+        color: green;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h3>Dynamic Table with 3 Rows and 3 Columns</h3>
+      <table id="d_table" border="1"></table>
+    </div>
+    <br>
+    <div>
+      <button id="colorButton" class="button">Hover to Change Color</button>
+    </div>
+
+    <div>
+      <label for="">Focus to Change Color</label>
+      <input type="text" id="txt_inp" class="inp" />
+    </div>
+    <div id="msg" class="greeting"></div>
+
+    <div>
+      <input type="text" id="txt" class="inp" placeholder="Enter text" />
+      <button id="addButton" class="button">Double Click to Add Item</button>
+      <ul id="itemList"></ul>
+    </div>
+
+    <div>
+      <label for="">Press Keys to count</label>
+      <input type="text" id="keyInput" class="inp" />
+      <p>Key Press Count: <span id="keyCount">0</span></p>
+    </div>
+
+    <script>
+      function createTable() {
+        var table = document.getElementById("d_table");
+        for (var i = 0; i < 3; i++) {
+          var row = table.insertRow(i);
+          for (var j = 0; j < 3; j++) {
+            var cell = row.insertCell(j);
+            cell.style.padding = "20px";
+          }
+        }
+      }
+      createTable();
+
+      var button = document.getElementById("colorButton");
+      button.addEventListener("mouseover", function () {
+        button.style.backgroundColor = "orange";
+      });
+      button.addEventListener("mouseout", function () {
+        button.style.backgroundColor = "aquamarine";
+      });
+
+      var txt_inp = document.getElementById("txt_inp");
+      var msg = document.getElementById("msg");
+
+      txt_inp.addEventListener("focus", function () {
+        txt_inp.style.backgroundColor = "yellow";
+      });
+      txt_inp.addEventListener("blur", function () {
+        txt_inp.style.backgroundColor = "red";
+      });
+      txt_inp.addEventListener("change", function () {
+        msg.innerHTML = "Greeting Message";
+      });
+
+      var txt = document.getElementById("txt");
+      var addButton = document.getElementById("addButton");
+      var itemList = document.getElementById("itemList");
+
+      addButton.addEventListener("dblclick", function () {
+        var newItem = document.createElement("li");
+        newItem.textContent = txt.value;
+        itemList.appendChild(newItem);
+        txt.value = "";
+      });
+
+      var keyInput = document.getElementById("keyInput");
+      var keyCount = document.getElementById("keyCount");
+
+      keyInput.addEventListener("keydown", function () {
+        var count = parseInt(keyCount.textContent);
+        keyCount.textContent = count + 1;
+      });
+    </script>
+  </body>
+</html>

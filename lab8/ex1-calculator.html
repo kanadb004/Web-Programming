@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1265</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        h1:hover {
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1 onclick="calculator()">Click to start Calculator</h1>
+
+    <script>
+        function calculator() {
+            let x = parseFloat(prompt("Enter first operand:"));
+            let y = parseFloat(prompt("Enter second operand:"));
+            let o = prompt("Enter operation:");
+            let res;
+
+            switch(o) {
+                case '+': {
+                    res = x + y;
+                    break;
+                } case '-': {
+                    res = x - y;
+                    break;
+                } case '*': {
+                    res = x * y;
+                    break;
+                } case '/': {
+                    res = x / y;
+                    break;
+                } case '%': {
+                    res = x % y;
+                    break;
+                } default: {
+                    alert("Invalid!");
+                    break;
+                }
+            }
+
+            alert("Result: " + res);
+        }
+    </script>
+</body>
+</html>

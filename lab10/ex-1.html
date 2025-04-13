@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1265</title>
+    <link rel="stylesheet" href="ex-1-styles.css">
+</head>
+<body>
+    <h1>Hospital Patient Data</h1>
+
+    <form id="filterForm">
+        <label for="minAge">Min Age:</label>
+        <input type="number" id="minAge" required>
+        
+        <label for="maxAge">Max Age:</label>
+        <input type="number" id="maxAge" required>
+        
+        <button type="button" onclick="filterPatients()">Filter</button>
+    </form>
+
+    <form id="checkForm">
+        <label for="patientId">Enter P-Id to Check:</label>
+        <input type="number" id="patientId" required>
+        
+        <button type="button" onclick="checkPatientId()">Check</button>
+    </form>
+
+    <button onclick="sortPatients()">Sort by Age (Descending)</button>
+
+    <table id="patientTable">
+        <thead>
+            <tr>
+                <th>P-Id</th>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script src="ex-1-script.js"></script>
+</body>
+</html>
