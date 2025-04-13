@@ -9,4 +9,6 @@ Run the ```index.html``` file to access all the lab exercises in a sequential ma
 
 **Note:**
 React Projects have been uploaded along with their entire app environment. After cloning, go to directory of the respective project and run it using
-```npm run dev```
+```
+npm run dev
+```
